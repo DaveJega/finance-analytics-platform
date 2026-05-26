@@ -1,38 +1,15 @@
-credentials
-username: 
-  admin:
-   email: admin@gmail.com
-   name: Admin User
-   password: admin123
-
-   cookie:
-     expiry_days: 30
-     key: finance_dashboard_key
-     name: finance_dashboard_cookie
-
-     preauthorized:
-        emails:
-          - admin@gmail.com
-          
-with open('config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
-
-    authenticator = stauth.Authenticate(
-        config['credentials'],
-        config['cookie']['name'],
-        config['cookie']['key'],
-        config['cookie']['expiry_days']
-    )
-
-    name, authentication_status, username = authenticator.login(
-        'Login',
-        'main'
-    ) 
-    if authentication_status:
-        authenticator.logout('Logout', 'sidebar')
-        st.success(f'Welcome {name}!')
-    elif authentication_status == False:
-        st.error('Username/password is incorrect')
-    elif authentication_status == None:
-        st.warning('Please enter your username and password')   
-              
+cookie:
+  expiry_days: 30
+  key: finance_dashboard_key
+  name: finance_dashboard_cookie
+credentials:
+  usernames:
+    admin:
+      email: admin@gmail.com
+      failed_login_attempts: 0
+      first_name: Admin
+      last_name: User
+      logged_in: true
+      password: $2b$12$kZapThB/hbt4Y6kZ1PldcOeJlX.QnvnhA3GwHD2JsJasz3PIx08XK
+preauthorized:
+  emails: []
